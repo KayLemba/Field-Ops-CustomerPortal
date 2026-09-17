@@ -1,0 +1,142 @@
+@import "tailwindcss";
+/* Class-based dark mode — a boot script sets `.dark` on <html> before paint. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50: #fdf1f5;
+  --color-brand-100: #fbe0ea;
+  --color-brand-200: #f5b9d1;
+  --color-brand-300: #ec8bb0;
+  --color-brand-400: #d95a8a;
+  --color-brand-500: #b91b60;
+  --color-brand-600: #9c1257;
+  --color-brand-700: #7d0f47;
+  --color-brand-800: #630c39;
+  --color-brand-900: #4a092b;
+
+  --color-ink-950: #0a0a0b;
+  --color-ink-900: #121214;
+  --color-ink-800: #1c1c20;
+  --color-ink-700: #2a2a30;
+  --color-ink-600: #45454e;
+  --color-ink-400: #8a8a93;
+  --color-ink-200: #d4d4d9;
+  --color-ink-100: #ececef;
+  --color-ink-50: #f7f7f9;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  --color-bg: var(--color-ink-50);
+  --color-surface: #ffffff;
+  --color-surface-2: var(--color-ink-100);
+  --color-fg: var(--color-ink-950);
+  --color-fg-muted: var(--color-ink-600);
+  --color-fg-subtle: var(--color-ink-400);
+  --color-border: var(--color-ink-200);
+  --color-border-strong: var(--color-ink-200);
+
+  --color-brand: var(--color-brand-600);
+  --color-brand-deep: var(--color-brand-700);
+  --color-brand-soft: var(--color-brand-100);
+  --color-danger: #dc2626;
+
+  /* Avatar palette */
+  --color-violet: #7c3aed;
+  --color-blue: #2563eb;
+  --color-amber: #d97706;
+  --color-cyan: #0891b2;
+  --color-rose: #e11d48;
+
+  /* Back-compat aliases used by a few older components */
+  --bg: var(--color-bg);
+  --bg-elevated: var(--color-surface);
+  --fg: var(--color-fg);
+  --fg-muted: var(--color-fg-muted);
+  --border: var(--color-border);
+  --brand: var(--color-brand);
+  --brand-fg: #ffffff;
+  --brand-hover: var(--color-brand-deep);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: var(--color-ink-950);
+    --color-surface: var(--color-ink-900);
+    --color-surface-2: var(--color-ink-800);
+    --color-fg: var(--color-ink-50);
+    --color-fg-muted: var(--color-ink-400);
+    --color-fg-subtle: var(--color-ink-600);
+    --color-border: var(--color-ink-700);
+    --color-border-strong: var(--color-ink-600);
+    --color-brand: var(--color-brand-500);
+    --color-brand-deep: var(--color-brand-400);
+    --color-brand-soft: rgba(185, 27, 96, 0.18);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-surface-2: var(--color-ink-800);
+  --color-fg: var(--color-ink-50);
+  --color-fg-muted: var(--color-ink-400);
+  --color-fg-subtle: var(--color-ink-600);
+  --color-border: var(--color-ink-700);
+  --color-border-strong: var(--color-ink-600);
+  --color-brand: var(--color-brand-500);
+  --color-brand-deep: var(--color-brand-400);
+  --color-brand-soft: rgba(185, 27, 96, 0.18);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Button loading indicator */
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  animation: pulse-dot 1s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Modal enter transition */
+.fade-rise {
+  animation: fade-rise 0.16s ease-out;
+}
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton loading rows */
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-surface-2) 30%,
+    var(--color-border) 50%,
+    var(--color-surface-2) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  from { background-position: 150% 0; }
+  to { background-position: -50% 0; }
+}
