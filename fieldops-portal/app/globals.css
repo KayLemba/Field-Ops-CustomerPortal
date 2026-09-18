@@ -58,6 +58,18 @@
   --brand: var(--color-brand);
   --brand-fg: #ffffff;
   --brand-hover: var(--color-brand-deep);
+
+  /* Sidebar — deep maroon in both themes, per the FieldOps brand */
+  --color-sidebar-bg: var(--color-brand-800);
+  --color-sidebar-bg-active: rgba(255, 255, 255, 0.16);
+  --color-sidebar-bg-hover: rgba(255, 255, 255, 0.08);
+  --color-sidebar-fg: rgba(255, 255, 255, 0.72);
+  --color-sidebar-fg-active: #ffffff;
+  --color-sidebar-border: rgba(255, 255, 255, 0.12);
+
+  --sidebar-w-expanded: 248px;
+  --sidebar-w-collapsed: 84px;
+  --bottom-nav-h: 64px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -102,6 +114,25 @@ body {
 
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Sidebar / content shell */
+.sidebar-shell {
+  transition: width 0.18s ease, margin-left 0.18s ease;
+}
+
+.content-shell {
+  margin-left: 0;
+  transition: margin-left 0.18s ease;
+}
+@media (min-width: 768px) {
+  .content-shell {
+    margin-left: var(--content-ml, 0px);
+  }
+}
+
+.bottom-nav-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--bottom-nav-h));
 }
 
 /* Button loading indicator */
